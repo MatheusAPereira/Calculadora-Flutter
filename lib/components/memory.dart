@@ -1,5 +1,3 @@
-
-
 import 'package:calculadora/components/calculator.dart';
 
 class Memory{
@@ -19,7 +17,8 @@ class Memory{
         Wrapper.value += command;
         Wrapper.resultMode = false;
       } else if (Wrapper.resultMode && Memory.numbers.contains(command)){
-        Wrapper.value == command;
+        Wrapper.value = command;
+        Wrapper.resultMode = false;
       } else {
         Wrapper.value += command;
       }
@@ -34,27 +33,19 @@ class Memory{
           break;
         case '=':
           String result = calculator.calc(Wrapper.value);
-          Wrapper.value = result;
+          Wrapper.value = _doubleToIntString(result);
           Wrapper.resultMode = true;
-          break;
-        Default:
-        break;
       }
     }
   }
 
-  _onCommand(command){
-    if(Wrapper.initMode == true){
-        Wrapper.value = command;
-        Wrapper.initMode = false;
-      } else if (Wrapper.resultMode && Memory.operations.contains(command)){
-        Wrapper.value += command;
-        Wrapper.resultMode = false;
-      } else if (Wrapper.resultMode && Memory.numbers.contains(command)){
-        Wrapper.value == command;
-      } else {
-        Wrapper.value += command;
-      }
+  String _doubleToIntString(String result){
+    if(result.contains('.')){
+      double rDouble = double.parse(result);
+      int rInt = rDouble.toInt();
+      return rInt.toString();
+    }
+    return result;
   }
 
   _clear(){
