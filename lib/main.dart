@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
 import 'pages/caculatorPage.dart';
 
-void main() => runApp(CalculatorPage());
+void main() => runApp(const CalculatorPage());

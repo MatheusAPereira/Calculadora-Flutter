@@ -15,10 +15,9 @@ class Keyboard extends StatelessWidget{
       color: Colors.black,
       height: 500,
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
         ButtonRow([
-          Button.firstLine(text: 'C', callback: callback,),
+          Button.firstLine(text: 'C', callback: callback),
           Button.firstLine(text: '±', callback: callback),
           Button.firstLine(text: '%', callback: callback),
           Button.emphasisLine(text: '÷', callback: callback)

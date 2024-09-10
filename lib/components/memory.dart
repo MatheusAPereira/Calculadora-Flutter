@@ -4,17 +4,26 @@ import 'package:calculadora/components/calculator.dart';
 
 class Memory{
 
-  final commands = ['C', '±', '⌫', '='];
-  final numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  static final commands = ['C', '±', '⌫', '='];
+  static final operations = ['÷', '×', '−', '+'];
+  static final numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   Calculator calculator = Calculator();
 
   void applyCommand(String command){
-    if(numbers.contains(command) & Wrapper.resultMode){
-      Wrapper.value = command;
-      Wrapper.resultMode = false;
-    } else if (commands.contains(command)){
-
+    if(!commands.contains(command)){
+      if(Wrapper.initMode == true){
+        Wrapper.value = command;
+        Wrapper.initMode = false;
+      } else if (Wrapper.resultMode && Memory.operations.contains(command)){
+        Wrapper.value += command;
+        Wrapper.resultMode = false;
+      } else if (Wrapper.resultMode && Memory.numbers.contains(command)){
+        Wrapper.value == command;
+      } else {
+        Wrapper.value += command;
+      }
+    } else {
       switch (command) {
         case 'C':
           _clear();
@@ -29,17 +38,23 @@ class Memory{
           Wrapper.resultMode = true;
           break;
         Default:
-          print('cheguei!');
-          break;
+        break;
       }
-    } else {
-      if(Wrapper.initMode == true){
+    }
+  }
+
+  _onCommand(command){
+    if(Wrapper.initMode == true){
         Wrapper.value = command;
         Wrapper.initMode = false;
+      } else if (Wrapper.resultMode && Memory.operations.contains(command)){
+        Wrapper.value += command;
+        Wrapper.resultMode = false;
+      } else if (Wrapper.resultMode && Memory.numbers.contains(command)){
+        Wrapper.value == command;
       } else {
         Wrapper.value += command;
       }
-    }
   }
 
   _clear(){

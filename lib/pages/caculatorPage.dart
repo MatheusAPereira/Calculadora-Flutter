@@ -6,6 +6,8 @@ import '../components/keyboard.dart';
 
 class CalculatorPage extends StatefulWidget {
 
+  const CalculatorPage({super.key});
+
   @override
   State<CalculatorPage> createState() => _CalculatorState();
 }
@@ -17,7 +19,6 @@ class _CalculatorState extends State<CalculatorPage> {
   _onPressed(String command){
     setState(() {
       memory.applyCommand(command);
-      print(memory.value);
     });
   }
 
@@ -30,10 +31,8 @@ class _CalculatorState extends State<CalculatorPage> {
     return MaterialApp(
       home: Column(
         children: <Widget>[
-          //Display('1,258.2', '6,291÷5'),
           Display(memory: memory),
           Keyboard(_onPressed),
-          //FontLoaderExample()
         ],
       ),
       debugShowCheckedModeBanner: false,

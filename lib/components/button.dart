@@ -3,26 +3,28 @@ import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget{
 
-  static const DEFAULT_COLOR = Color.fromARGB(255, 46, 47, 56);
-  static const FIRST_LINE_COLOR = Color.fromARGB(255, 78, 80, 95);
-  static const EMPHASIS_COLOR = Color.fromARGB(255, 75, 94, 252);
+  static const defaultDark = Color.fromARGB(255, 46, 47, 56);
+  static const firstLineDark = Color.fromARGB(255, 78, 80, 95);
+  static const emphasisLineDark = Color.fromARGB(255, 75, 94, 252);
 
   final String? text;
   final IconData? icon;
   final Color color;
   final void Function(String) callback;
   
-  const Button({this.text, this.icon, this.color = DEFAULT_COLOR, required this.callback});
-  const Button.firstLine({this.text, this.icon, this.color = FIRST_LINE_COLOR, required this.callback});
-  const Button.emphasisLine({this.text, this.icon, this.color = EMPHASIS_COLOR, required this.callback});
+  const Button({super.key, this.text, this.icon, this.color = defaultDark, required this.callback});
+  const Button.firstLine({super.key, this.text, this.icon, this.color = firstLineDark, required this.callback});
+  const Button.emphasisLine({super.key, this.text, this.icon, this.color = emphasisLineDark, required this.callback});
 
   @override
   Widget build(BuildContext context) {
 
     return Expanded(
+        child: Padding(padding: const EdgeInsets.all(8),
         child: ElevatedButton(
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(color),
+            shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(28.0))))
           ),
           onPressed: 
             () => callback(text!)
@@ -31,7 +33,7 @@ class Button extends StatelessWidget{
           ? Icon(icon)
           : Text(
             text!,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Work Sans',
               fontWeight: FontWeight.w300,
               fontSize: 32,
@@ -39,6 +41,7 @@ class Button extends StatelessWidget{
               ),
             ),
       )
+    )
     );
   }
 }

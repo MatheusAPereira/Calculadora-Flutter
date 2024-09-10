@@ -12,7 +12,7 @@ class ButtonRow extends StatelessWidget{
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: buttons,
-      ),
+    )
     );
   }
 }

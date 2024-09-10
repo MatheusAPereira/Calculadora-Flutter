@@ -9,6 +9,8 @@ class DisplayState extends State<Display>{
 
   @override
   void initState() {
+    super.initState();
+  
   }
 
   @override
