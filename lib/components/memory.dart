@@ -5,10 +5,13 @@ class Memory{
   static final commands = ['C', '±', '⌫', '='];
   static final operations = ['÷', '×', '−', '+'];
   static final numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
+  static final toDo = ['%'];
   Calculator calculator = Calculator();
 
   void applyCommand(String command){
+    if(toDo.contains(command)){
+      command = '';
+    }
     if(!commands.contains(command)){
       if(Wrapper.initMode == true){
         Wrapper.value = command;
@@ -30,9 +33,11 @@ class Memory{
         case '±':
           break;
         case '⌫':
+          _delete();
           break;
         case '=':
           String result = calculator.calc(Wrapper.value);
+          Wrapper.lastValue = value;
           Wrapper.value = _doubleToIntString(result);
           Wrapper.resultMode = true;
       }
@@ -50,11 +55,28 @@ class Memory{
 
   _clear(){
     Wrapper.value = '0';
+    Wrapper.lastValue = '';
     Wrapper.initMode = true;
+  }
+
+  _delete(){
+    int length = Wrapper.value.length;
+    if(length > 1){
+      Wrapper.value = Wrapper.value.substring(0, length - 1);
+      Wrapper.resultMode = false;
+    } else {
+      Wrapper.value = '0';
+      Wrapper.lastValue = '';
+      Wrapper.initMode = true;
+    }
   }
 
   String get value{
       return Wrapper.value;
+  }
+
+  String get lastValue{
+    return Wrapper.lastValue;
   }
 
 }
@@ -62,5 +84,7 @@ class Memory{
 class Wrapper{
   static bool initMode = true;
   static String value = '0';
+  static String lastValue = '';
   static bool resultMode = false;
+  
 }

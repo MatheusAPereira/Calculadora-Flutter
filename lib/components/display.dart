@@ -28,7 +28,7 @@ class DisplayState extends State<Display>{
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
               AutoSizeText(
-              upperText,
+              upperText = widget.memory.lastValue,
               minFontSize: 20,
               maxFontSize: 100,
               maxLines: 1,
